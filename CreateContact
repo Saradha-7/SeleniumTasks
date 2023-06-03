@@ -1,0 +1,43 @@
+package week2.assignments;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class CreateContact {
+
+	public static void main(String[] args) {
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps/control/login");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.findElement(By.xpath("//input[@id='username']")).sendKeys("demoSalesManager");
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("crmsfa");
+		driver.findElement(By.xpath("//input[@class='decorativeSubmit']")).click();
+		driver.findElement(By.id("label")).click();
+		driver.findElement(By.linkText("Contacts")).click();
+		driver.findElement(By.linkText("Create Contact")).click();
+		driver.findElement(By.xpath("//input[@id='firstNameField']")).sendKeys("saradha");
+		driver.findElement(By.xpath("//input[@id='lastNameField']")).sendKeys("A");
+		driver.findElement(By.xpath("//input[@id='createContactForm_firstNameLocal']")).sendKeys("saradha");
+		driver.findElement(By.xpath("//input[@id='createContactForm_lastNameLocal']")).sendKeys("A");
+		driver.findElement(By.name("departmentName")).sendKeys("Testing");
+		driver.findElement(By.name("description")).sendKeys("Automation Testing java selenium");
+		driver.findElement(By.xpath("//input[@name='primaryEmail']")).sendKeys("sara@testleaf.com");
+		
+		WebElement city = driver.findElement(By.name("generalStateProvinceGeoId"));
+		Select c = new Select(city);
+		c.selectByVisibleText("New York");
+		
+		driver.findElement(By.name("submitButton")).click();
+		driver.findElement(By.linkText("Edit")).click();
+		driver.findElement(By.name("description")).clear();
+		driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys("Testing details");
+		driver.findElement(By.name("submitButton")).click();
+		driver.getTitle();	
+	}
+
+}
